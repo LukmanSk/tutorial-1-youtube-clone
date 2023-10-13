@@ -1,7 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
+import { AppContext } from "./context/contextApi";
 
 const App = () => {
-  return <div className="app">App</div>;
+  return (
+    <AppContext>
+      <div className="app">App</div>
+    </AppContext>
+  );
 };
 
 export default App;
