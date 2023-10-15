@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { fetchDataFromAPI } from "../utils/api";
 
-const Context = createContext();
+export const Context = createContext();
 
 export const AppContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
@@ -11,10 +13,13 @@ export const AppContext = ({ children }) => {
 
   const fetchSelectedCategoryData = (query) => {
     setLoading(true);
-    fetchDataFromAPI(`search/?q=${query}`).then((res) => {
-      console.log(res);
+    // fetchDataFromAPI(`search/?q=${query}`).then((res) => {
+    //   console.log(res);
+    //   setLoading(false);
+    // });
+    setTimeout(() => {
       setLoading(false);
-    });
+    }, 3000);
   };
 
   useEffect(() => {

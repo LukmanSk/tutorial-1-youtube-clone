@@ -1,10 +1,16 @@
-import React from "react";
 import { AppContext } from "./context/contextApi";
-
+import Header from "./components/Header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Feed from "./components/Feed";
 const App = () => {
   return (
     <AppContext>
-      <div className="app">App</div>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Feed />} />
+        </Routes>
+      </BrowserRouter>
     </AppContext>
   );
 };
