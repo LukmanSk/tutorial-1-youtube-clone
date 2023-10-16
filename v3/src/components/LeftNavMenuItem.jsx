@@ -1,5 +1,19 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
-export const LeftNavMenuItem = () => {
-  return <div>LeftNavMenuItem</div>;
+const LeftNavMenuItem = ({ text, icon, action, className }) => {
+  return (
+    <div
+      onClick={action}
+      className={
+        "text-white text-sm cursor-pointer h-10 flex items-center px-3 mb-[1px] rounded-lg hover:bg-white/[0.15] " +
+        className
+      }
+    >
+      <span className="text-xl mr-5">{icon}</span>
+      {text}
+    </div>
+  );
 };
+
+export default LeftNavMenuItem;

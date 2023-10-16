@@ -1,5 +1,11 @@
+import LeftNav from "./LeftNav";
+
 const Feed = () => {
-  return <div>Feed</div>;
+  return (
+    <div>
+      <LeftNav />
+    </div>
+  );
 };
 
 export default Feed;

@@ -8,7 +8,7 @@ export const Context = createContext();
 export const AppContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState("new");
+  const [selectCategories, setSelectCategories] = useState("new");
   const [mobileMenu, setMobileMenu] = useState(false);
 
   const fetchSelectedCategoryData = (query) => {
@@ -24,8 +24,8 @@ export const AppContext = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchSelectedCategoryData(selectedCategories);
-  }, [selectedCategories]);
+    fetchSelectedCategoryData(selectCategories);
+  }, [selectCategories]);
 
   return (
     <Context.Provider
@@ -34,8 +34,8 @@ export const AppContext = ({ children }) => {
         setLoading,
         searchResults,
         setSearchResults,
-        selectedCategories,
-        setSelectedCategories,
+        selectCategories,
+        setSelectCategories,
         mobileMenu,
         setMobileMenu,
       }}
