@@ -13,13 +13,13 @@ export const AppContext = ({ children }) => {
 
   const fetchSelectedCategoryData = (query) => {
     setLoading(true);
-    fetchDataFromAPI(`search/?q=${query}`).then(({ contents }) => {
-      setSearchResults(contents);
-      setLoading(false);
-    });
-    // setTimeout(() => {
+    // fetchDataFromAPI(`search/?q=${query}`).then(({ contents }) => {
+    //   setSearchResults(contents);
     //   setLoading(false);
-    // }, 3000);
+    // });
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   };
 
   useEffect(() => {
