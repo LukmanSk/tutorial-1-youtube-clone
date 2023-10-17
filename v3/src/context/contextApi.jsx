@@ -7,20 +7,19 @@ export const Context = createContext();
 
 export const AppContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const [selectCategories, setSelectCategories] = useState("new");
   const [mobileMenu, setMobileMenu] = useState(false);
 
   const fetchSelectedCategoryData = (query) => {
     setLoading(true);
-    // fetchDataFromApi(`search/?q=${query}`).then((res) => {
-    //   console.log(res);
-    //   //   setSearchResults(true);
-    //   setLoading(false);
-    // });
-    setTimeout(() => {
+    fetchDataFromApi(`search/?q=${query}`).then(({ contents }) => {
+      setSearchResults(contents);
       setLoading(false);
-    }, 3000);
+    });
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 3000);
   };
 
   useEffect(() => {
