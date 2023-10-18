@@ -17,16 +17,9 @@ const VideoDetails = () => {
   const { id } = useParams();
   const { setLoading } = useContext(Context);
 
-  useEffect(() => {
-    document.querySelector("#root").classList.add("custom-h");
-
-    fetchVideoDetails();
-    fetchRelatedVideos();
-  }, [fetchVideoDetails, fetchRelatedVideos, id]);
-
   const fetchVideoDetails = () => {
     setLoading(true);
-    fetchDataFromAPI(`/video/details/?id=${id}`).then((res) => {
+    fetchDataFromAPI(`video/details/?id=${id}`).then((res) => {
       console.log(res);
       setVideo(res);
       setLoading(false);
@@ -35,12 +28,19 @@ const VideoDetails = () => {
 
   const fetchRelatedVideos = () => {
     setLoading(true);
-    fetchDataFromAPI(`/video/related-contents/?id=${id}`).then((res) => {
+    fetchDataFromAPI(`video/related-contents/?id=${id}`).then((res) => {
       console.log(res);
       setRelatedVideos(res);
       setLoading(false);
     });
   };
+
+  useEffect(() => {
+    document.getElementById("root").classList.add("custom-h");
+    fetchVideoDetails();
+    fetchRelatedVideos();
+  }, [fetchVideoDetails, fetchRelatedVideos, id]);
+
   return (
     <div className="flex justify-center flex-row h-[calc(100%-56px)] bg-black">
       <div className="w-full max-w-[1280px] flex flex-col lg:flex-row">
@@ -97,6 +97,12 @@ const VideoDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          {relatedVideos?.contents?.map((item, i) => {
+            if (item?.type !== "video") return;
+            return <SuggestionVideoCard key={i} video={item?.video} />;
+          })}
         </div>
       </div>
     </div>
