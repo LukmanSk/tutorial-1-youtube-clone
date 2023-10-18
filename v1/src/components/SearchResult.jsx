@@ -1,7 +1,48 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+
+import { fetchDataFromAPI } from "../utils/api";
+import { Context } from "../context/contextApi";
+import LeftNav from "./LeftNav";
+import SearchResultVideoCard from "./SearchResultVideoCard";
 
 function SearchResult() {
-  return <div>SearchResult</div>;
+  const [results, setResults] = useState();
+  const { searchQuery } = useParams();
+  const { setLoading } = useContext(Context);
+
+  function fetchSearchResults() {
+    setLoading(true);
+    fetchDataFromAPI(`search/?q=${searchQuery}`).then((res) => {
+      setResults(res?.contents);
+      setLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    document.getElementById("root").classList.remove("custom-h");
+    fetchSearchResults();
+  }, [searchQuery]);
+
+  return (
+    <div className="flex flex-row h-[calc(100%-56px)]">
+      <LeftNav />
+      <div className="grow w-[calc(100%-240px)] h-full overflow-y-auto bg-black">
+        <div className="grid grid-cols-1 gap-2 p-5">
+          {results?.map((item) => {
+            if (item?.type !== "video") return;
+            return (
+              <SearchResultVideoCard
+                key={item?.video?.videoId}
+                video={item?.video}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default SearchResult;
